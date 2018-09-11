@@ -138,7 +138,6 @@ if __name__ == '__main__':
     while True:
         file_list = getfilelist(CWD)
         # 移除新上传文件
-        md5_dict = getfilemd5dict(ORIGIN_FILE_LIST)
         diff_file_list = list(set(file_list).difference(set(ORIGIN_FILE_LIST)))
         delete_file_list = list(set(ORIGIN_FILE_LIST).difference(set(file_list)))
         # 防止任意文件被修改,还原被修改文件
@@ -179,6 +178,7 @@ if __name__ == '__main__':
                 except Exception as e:
                     print u'[-] log error : done_delete: ' + getUnicode(deletepath) 
                     pass
+        md5_dict = getfilemd5dict(ORIGIN_FILE_LIST)
         for filekey in md5_dict:
             if md5_dict[filekey] != FILE_MD5_DICT[filekey]:
                 try:
