@@ -147,6 +147,7 @@ if __name__ == '__main__':
                     f = open(filepath, 'r').read()
                 except Exception as e:
                     print getUnicode(e)
+                    f = ''
                 if Special_string not in f:
                     try:
                         print u'[*] webshell find : ' + getUnicode(filepath)
@@ -165,6 +166,9 @@ if __name__ == '__main__':
             for deletepath in delete_file_list:
                 try:
                     print u'[*] file had be delete: '+getUnicode(deletepath)
+                    deletedir = os.path.dirname(deletepath)
+                    if os.path.exists(deletedir)==False:
+                        os.makedirs(deletedir)
                     shutil.copy2(os.path.join(Special_path['bak'], ntpath.basename(deletepath)+'-'+FILE_MD5_DICT[deletepath]), deletepath)
                 except Exception as e:
                     print u'[!] restore delete file error, "%s" can not restore.'%getUnicode(deletepath)
